@@ -1,0 +1,44 @@
+services:
+  web_ssl:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: "./docker/development/Dockerfile"
+    command: ["bundle", "exec", "rails", "s", "-b", "ssl://0.0.0.0?key=/tmp/localhost.key&cert=/tmp/localhost.crt"]
+    volumes:
+      - .:/usr/src/app
+      - bundle:/usr/local/bundle
+    ports:
+      - 443:3000
+    env_file:
+      - .env
+    networks:
+      main:
+        aliases:
+          - web
+          - app.lvh.me
+  web:
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: "./docker/development/Dockerfile"
+    command: bash -c "bin/rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/usr/src/app
+      - bundle:/usr/local/bundle
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    networks:
+      main:
+        aliases:
+          - web
+          - app.lvh.me
+
+volumes:
+  bundle:
+networks:
+  main:
