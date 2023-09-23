@@ -78,3 +78,10 @@ yarn-debug.log*
 /config/credentials/production.key
 
 /config/credentials/staging.key
+
+/markdown.xml
+/misc.xml
+/modules.xml
+/ruby_project.iml
+/vcs.xml
+/workspace.xml
