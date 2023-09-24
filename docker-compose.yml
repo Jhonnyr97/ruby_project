@@ -13,6 +13,8 @@ services:
       - 443:3000
     env_file:
       - .env
+    depends_on:
+      - db
     networks:
       main:
         aliases:
@@ -32,12 +34,32 @@ services:
       - 3000:3000
     env_file:
       - .env
+    depends_on:
+      - db
     networks:
       main:
         aliases:
           - web
           - app.lvh.me
-
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - .env
+    networks:
+      main:
+        aliases:
+          - db
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      main:
+        - adminer.lvh.me
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
 volumes:
   bundle:
 networks:
