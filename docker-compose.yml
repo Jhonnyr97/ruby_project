@@ -41,6 +41,21 @@ services:
         aliases:
           - web
           - app.lvh.me
+  sidekiq:
+    build:
+      context: .
+      dockerfile: "./docker/development/Dockerfile"
+    command: bundle exec sidekiq
+    env_file:
+      - .env
+    volumes:
+      - .:/usr/src/app
+      - bundle:/usr/local/bundle
+    depends_on:
+      - db
+      - redis
+    networks:
+      main:
   db:
     image: postgres
     restart: always
@@ -50,12 +65,22 @@ services:
       main:
         aliases:
           - db
+  redis:
+    image: redis
+    restart: always
+    env_file:
+      - .env
+    networks:
+      main:
+        aliases:
+          - redis
   adminer:
     image: adminer
     restart: always
     networks:
       main:
-        - adminer.lvh.me
+        aliases:
+          - adminer.lvh.me
     env_file:
       - .env
     ports:
