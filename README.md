@@ -3,7 +3,7 @@
 
 # Rails 7
 
-This app Rails 7, import maps, turbo, stimulus and hotwire, all running in Docker.
+This app Rails 7, import maps, turbo, postgres, sidekiq, redis, stimulus and hotwire, all running in Docker.
 
 ## Requirements
 
