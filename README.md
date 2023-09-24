@@ -1,9 +1,6 @@
-# README
-
-
 # Rails 7
 
-This app Rails 7, import maps, turbo, postgres, sidekiq, redis, stimulus and hotwire, all running in Docker.
+This app Rails 7 with ruby 3.2.2, import maps, turbo, postgres, sidekiq, redis, stimulus and hotwire, all running in Docker.
 
 ## Requirements
 
@@ -33,6 +30,7 @@ docker attach [container_id]
 ```
 docker-compose up web 
 ```
+Visit http://app.lvh.me/
 
 ## Running the Rails console
 When the app is already running with `docker-compose` up, attach to the container:
